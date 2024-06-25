@@ -1,0 +1,63 @@
+{{ define "title" }}{{ i18n .Data.Plural }} · {{ .Site.Title }}{{ end }}
+
+{{ define "header" }}
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title text-uppercase">
+          {{ i18n .Data.Plural }}
+        </h1>
+        <div class="header-underline"></div>
+        <p class="header-subtitle header-subtitle-homepage">
+          {{ i18n (printf "list_of_%s" .Data.Plural) }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ define "main" }}
+{{ $termName := .Data.Plural }}
+{{ $type := .Type }}
+<div class="archive-container">
+    <div class="container content archive">
+    {{ if and $.Site.Taxonomies.categories (eq $termName "categories") }}
+      {{ range .Data.Terms.ByCount }}
+        {{ $name := .Name }}
+        {{ $pages := .Pages }}
+        {{ with $.Site.GetPage "taxonomy" (printf "/%s/%s" $type .Term) }}
+          <h2><a href="{{ .Permalink }}">{{ $name }}</a></h2>
+          <dl class="row">
+              {{ range first ($.Site.Params.numListPosts | default 10) $pages }}
+              <dt class="col-md-3">{{ .Date.Format ($.Site.Params.dateFormatToUse | default "Mon 02 January 2006") }}</dt>
+              <dd class="col-md-9"><a href="{{ .Permalink }}">{{ .Title }}</a></dd>
+              {{ end }}
+          </dl>
+          {{ if gt (len $pages) ($.Site.Params.numListPosts | default 10) }}
+            <div class="more-post">
+              <a href="{{ .Permalink }}" class="more-post-link btn btn-light">{{ i18n "more_post" }}</a>
+            </div>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ else if and $.Site.Taxonomies.tags (eq $termName "tags") }}
+      <h2><a href="{{ .Permalink }}">{{ i18n (printf "list_of_%s" .Data.Plural) }}</a></h2>
+      <dl class="row">
+      {{ range .Data.Terms.Alphabetical }}
+        {{ $name := .Name }}
+        {{ $count := len .Pages }}
+        {{ with $.Site.GetPage "taxonomy" (printf "/%s/%s" $type .Term) }}
+            <dt class="col-md-3"><span class="badge badge-secondary">{{ $count }}</span> {{ if gt $count 1 }}{{ i18n "articles_tagged" }}{{ else }}{{ i18n "article_tagged" }}{{ end }}</dt>
+            <dd class="col-md-9"><a href="{{ .Permalink }}">{{ $name }}</a></dd>
+        {{ end }}
+      {{ end }}
+      </dl>
+    {{ end }}
+    </div>
+</div>
+{{ if not (eq $termName "tags") }}
+{{ partial "pagination.html" . }}
+{{ end }}
+{{ end }}

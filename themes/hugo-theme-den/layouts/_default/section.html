@@ -1,0 +1,53 @@
+{{ define "title" }}{{ i18n "archive" }} · {{ .Title }} · {{ .Site.Title }}{{ end }}
+{{ define "header" }}
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title text-uppercase">
+          <!-- {{ i18n "archive" }} : -->
+           {{ .Title }}
+        </h1>
+        <div class="header-underline"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ define "main" }}
+{{- $paginator := .Paginate .Data.Pages }}
+<div class="archive-container">
+    <div class="container content archive">
+      
+
+      <h2>{{ .Title }}{{ if $paginator.HasPrev }} <small>- {{ i18n "page" }} {{ $paginator.PageNumber }}</small>{{ end }}</h2>
+        <dl class="row">
+            {{ range $index, $value := $paginator.Pages -}}
+          
+              {{ if eq .Type "card" }}
+              
+              <div class="rectangle-container">
+                {{ if $value.Params.href }}
+                <a href="{{ $value.Params.href }}" target="_blank">
+                {{ else }}
+                <a href="{{ .Permalink }}">
+                {{ end }}
+                <div class="image-wrapper">
+                 <div class="product-image" style="background-image:url({{ $value.Params.image }})" alt="{{ .Title }}" ></div>
+                </div>
+                <div class="content-wrapper">
+                  <span>{{ .Title }}</span>
+                  <p>{{$value.Params.description}}</p>
+                </div>
+                </a>
+              </div>
+              {{ else }}
+                <dt class="col-md-3">{{ .Date.Format (.Site.Params.dateFormatToUse | default "Mon 02 January 2006") }}</dt>
+                <dd class="col-md-9"><a href="{{ .Permalink }}">{{ .Title }}</a></dd>
+              {{ end }}
+            {{ end }}
+        </dl>
+    </div>
+</div>
+{{ partial "pagination.html" . }}
+{{ end }}

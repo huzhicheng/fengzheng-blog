@@ -1,0 +1,100 @@
+{{ define "header" }}
+<style> .header-container {
+  background: #f5f5f5;
+  padding: 0;
+  min-height: 260px;
+}</style>
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">
+          {{ if .Site.Params.headerTitle }}
+            {{ .Site.Params.headerTitle | safeHTML }}
+          {{ else }}
+            {{ .Site.Title | safeHTML }}
+          {{ end }}
+        </h1>
+        <div class="header-underline"></div>
+        {{ with .Site.Params.description }}
+        <p class="header-subtitle header-subtitle-homepage">{{ . | safeHTML }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ define "main" }}
+{{- $pages := .Pages -}}
+{{- if .IsHome -}}
+  {{- $pages = where .Site.RegularPages "Type" "category" -}}
+{{- end -}}
+<!-- {{- $paginator := .Paginate $pages -}} -->
+<div class="archive-container">
+    <div class="container content archive">
+      <h2>{{ i18n "latest_posts" }}{{ if $paginator.HasPrev }} <small>- {{ i18n "page" }} {{ $paginator.PageNumber }}</small>{{ end }}</h2>
+        <dl class="row">
+            <!-- {{ range $paginator.Pages -}}
+            <dt class="col-md-3">{{ .Date.Format (.Site.Params.dateFormatToUse | default "Mon 02 January 2006") }}</dt>
+            <dd class="col-md-9"><a href="{{ .Permalink }}">{{ .Title }}</a></dd>
+            {{ end }} -->
+            {{ range $index, $page := first 6 $paginator.Pages }}
+              <dt class="col-md-3">{{ $page.Date.Format (.Site.Params.dateFormatToUse | default "Mon 02 January 2006") }}</dt>
+              <dd class="col-md-9"><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></dd>
+            {{ end }}
+        </dl>
+    </div>
+</div>
+<div class=" home-bg">
+  <div class="container archive popup-container">
+    <p>风吹过，我看见了风，自由，肆意，翩翩然，那正是风的姿态。
+    我多想变成那风。
+  </p>
+  <p>
+    梦想当作家，但是却当起了程序员。
+  </p>
+  <p></p>
+    古时的风筝，一个平庸的程序员，主语言 Java，第二语言 Python，其实学 Python 的时间比 Java 还要早。
+  </p>
+  <p>
+    喜欢写博客，写博客的过程能加深自己对一个知识点的理解，同时还可以分享给他人。
+  </p>
+  <p>
+    喜欢做一些小东西，所以也会一些前端的东西，React、JavaScript、CSS 都会一些，做一些小工具还够用。
+  </p>
+  <p>
+    不如交个朋友！
+  </p>
+
+    <div style="text-align: center;margin-top: 20px;">
+    <img src="images/person.jpg" class="responsive-image-qr"/>
+  </div>
+  </div>
+</div> 
+<script> 
+function addStars() {
+  const container = document.querySelector('.home-bg');
+  const numStars = 100; // 设置星星的数量
+
+  for (let i = 0; i < numStars; i++) {
+    const star = document.createElement('span');
+    star.classList.add('star');
+    star.innerHTML = '✨';
+    star.style.top = `${getRandomNumber(22, 80)}%`;
+    star.style.left = `${getRandomNumber(0, 100)}%`;
+    container.appendChild(star);
+  }
+}
+
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+//addStars();
+
+
+</script>
+
+   
+<!-- {{ partial "pagination.html" . }} -->
+{{ end }}

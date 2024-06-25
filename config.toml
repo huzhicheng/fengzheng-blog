@@ -1,0 +1,244 @@
+# ------------------------------------- #
+# ---- General Settings --------------- #
+# ------------------------------------- #
+baseURL = "https://www.showcodeba.com"
+title = "古时的风筝"
+theme = "hugo-theme-den"
+enableRobotsTXT = true       # generate robots.txt
+enableEmoji = true           # use emoji support
+hasCJKLanguage = true        # detect CJK languages for word count etc.
+preserveTaxonomyNames = true # do not make tag names lowercase
+# uglyURLs = true            # more info: https://gohugo.io/content-management/urls/#ugly-urls
+rssLimit = 20                # limit number of entries in RSS feeds
+
+disablePathToLower = true 
+
+# Copyright, appears in the footer
+# copyright = ""             # default: author.name
+
+# Pagination
+# number of entries per page for archives, tags and categories
+# since we don't have list view, recommend a large value
+paginate = 20
+paginatePath = "page"
+
+# Syntax Hightlight
+PygmentsCodeFences = true
+PygmentsUseClasses = true    # required for shhighlight shortcode
+
+# service plugins
+disqusShortname = ""         # disqus_shortname
+googleAnalytics = ""         # UA-XXXXXXXX-X
+
+# language support # en / zh-tw / other... translations present in i18n/
+defaultContentLanguage = "zh-cn"           # Default language to use
+defaultContentLanguageInSubdir = false
+
+
+
+# Links format
+[permalinks]
+  posts = "/:year/:month/:day/:slug/"
+  categories = "/category/:slug/"      # required
+  tags = "/tag/:slug/"                 # required
+  pages = "/:slug/"
+
+[author]                     # required
+  name = "风筝"
+
+[sitemap]                    # required
+  changefreq = "daily"
+  priority = 0.8
+  filename = "sitemap.xml"
+
+# ------------------------------------- #
+# ---- Other Params ------------------- #
+# ------------------------------------- #
+
+[params]
+  since = "2023"             # Site creation time
+  rssFullContent = true      # set true to use full content instead of summary
+
+  # site info (optional)
+  keywords = ["Hugo", "theme","编程",'Java','ChatGPT',"程序员",'开发']
+  description = "专注于Java及周边生态，准备做一个全栈开发者"
+  logoTitle = " " # shown on top-left, default: title
+  siteLogoImage = ""     # shown besides logoTitle
+  # headerTitle = "Den"                   # default: title
+  #headerImage = "images/background.png"
+  headerImage = "https://hexo.moonkite.cn/blog/background.png"
+  showAuthorCard = true # Whether to show author information below the article
+  comments = true
+  showMenuLanguages = true
+  customFavicon = "images/photo.png"
+
+  autoLoadComments = true # auto load comment when scrolling down
+
+  # paginate style, default use numbered pagination links
+  # if true, use original "Previous" and "Next" links.
+  # paginateOriginalStyle = true
+
+  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+  dateFormatToUse = "2006-01-02"
+
+  # google_verification = "google57680cd58c46e2f3.html"  # Google_Verification
+
+  enableRelated = true
+
+
+  # Link custom CSS and JS assets
+  #   (relative to /static/css and /static/js respectively)
+  customCSS = []             # if ['custom.css'], load '/static/css/custom.css' file
+  customJS = []              # if ['custom.js'], load '/static/js/custom.js' file
+
+  # [params.busuanzi]         # count web traffic by busuanzi # 是否使用不蒜子统计站点访问量
+  #   enable = true
+  #   siteUV = true
+  #   sitePV = true
+  #   pagePV = true
+# [params.utterance]
+#   enable = true
+#   owner = "huzhicheng"
+#   repo = "huzhicheng.github.io"
+
+# ------------------------------------- #
+# ---- Related Articles --------------- #
+# ------------------------------------- #
+[related]
+  # Only include matches with rank >= threshold. This is a normalized rank between 0 and 100.
+  threshold = 50
+
+  # To get stable "See also" sections we, by default, exclude newer related pages.
+  includeNewer = true
+
+  # Will lower case keywords in both queries and in the indexes.
+  toLower = false
+
+[[related.indices]]
+  name = "categories"
+  weight = 200
+
+[[related.indices]]
+  name = "keywords"
+  weight = 150
+
+[[related.indices]]
+  name = "tags"
+  weight = 100
+
+[languages.zh-cn]
+  languageCode = "zh-cn"
+  languageName = "简体中文"
+  contentDir = "content/cn"
+  weight = 2
+
+  [languages.zh-cn.params]
+    description = "一个程序员的喃喃自语"
+
+  [[languages.zh-cn.menu.main]]
+    name = '<i class="fas fad fa-h-square"></i>主页'
+    weight = 1
+    identifier = "home"
+    url = "/"
+
+  [[languages.zh-cn.menu.main]]
+    name = "<i class='fas fa-laptop-code'></i>技术文章"
+    weight = 20
+    identifier = "技术文章"
+
+  [[languages.zh-cn.menu.main]]
+    parent = "技术文章"
+    name = '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 48 48"><path fill="#F44336" d="M23.65,24.898c-0.998-1.609-1.722-2.943-2.725-5.455C19.229,15.2,31.24,11.366,26.37,3.999c2.111,5.089-7.577,8.235-8.477,12.473C17.07,20.37,23.645,24.898,23.65,24.898z"></path><path fill="#F44336" d="M23.878,17.27c-0.192,2.516,2.229,3.857,2.299,5.695c0.056,1.496-1.447,2.743-1.447,2.743s2.728-0.536,3.579-2.818c0.945-2.534-1.834-4.269-1.548-6.298c0.267-1.938,6.031-5.543,6.031-5.543S24.311,11.611,23.878,17.27z"></path><g><path fill="#1565C0" d="M32.084 25.055c1.754-.394 3.233.723 3.233 2.01 0 2.901-4.021 5.643-4.021 5.643s6.225-.742 6.225-5.505C37.521 24.053 34.464 23.266 32.084 25.055zM29.129 27.395c0 0 1.941-1.383 2.458-1.902-4.763 1.011-15.638 1.147-15.638.269 0-.809 3.507-1.638 3.507-1.638s-7.773-.112-7.773 2.181C11.683 28.695 21.858 28.866 29.129 27.395z"></path><path fill="#1565C0" d="M27.935,29.571c-4.509,1.499-12.814,1.02-10.354-0.993c-1.198,0-2.974,0.963-2.974,1.889c0,1.857,8.982,3.291,15.63,0.572L27.935,29.571z"></path><path fill="#1565C0" d="M18.686,32.739c-1.636,0-2.695,1.054-2.695,1.822c0,2.391,9.76,2.632,13.627,0.205l-2.458-1.632C24.271,34.404,17.014,34.579,18.686,32.739z"></path><path fill="#1565C0" d="M36.281,36.632c0-0.936-1.055-1.377-1.433-1.588c2.228,5.373-22.317,4.956-22.317,1.784c0-0.721,1.807-1.427,3.477-1.093l-1.42-0.839C11.26,34.374,9,35.837,9,37.017C9,42.52,36.281,42.255,36.281,36.632z"></path><path fill="#1565C0" d="M39,38.604c-4.146,4.095-14.659,5.587-25.231,3.057C24.341,46.164,38.95,43.628,39,38.604z"></path></g></svg>&nbsp;可爱的 Java'
+    weight = 1
+    identifier = "Java"
+    url = "category/java"
+
+  [[languages.zh-cn.menu.main]]
+    parent = "技术文章"
+    name = '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48"><path fill="#8bc34a" d="M43.982,23.635c0.069-4.261-0.891-9.328-2.891-15.273l-1.568-4.662l-2.13,4.433 c-0.114,0.237-0.244,0.469-0.38,0.698C33.514,5.827,28.974,4,24,4C12.954,4,4,12.954,4,24c0,11.046,8.954,20,20,20s20-8.954,20-20 C44,23.877,43.984,23.758,43.982,23.635z"></path><path fill="#fff" d="M39.385 32.558c-3.123 4.302-8.651 4.533-13.854 4.442H18.75h-1.938c4.428-1.593 7.063-1.972 9.754-3.4 5.068-2.665 10.078-8.496 11.121-14.562-1.93 5.836-7.779 10.85-13.109 12.889-3.652 1.393-10.248 2.745-10.248 2.745l-.267-.145C9.573 32.268 9.437 22.214 17.6 18.968c3.574-1.423 6.993-.641 10.854-1.593 4.122-1.012 8.89-4.208 10.83-8.375C41.456 15.667 44.07 26.106 39.385 32.558L39.385 32.558zM15.668 38.445C15.386 38.795 14.955 39 14.505 39c-.823 0-1.495-.677-1.495-1.5s.677-1.5 1.495-1.5c.341 0 .677.118.941.336C16.086 36.855 16.186 37.805 15.668 38.445L15.668 38.445z"></path></svg> &nbsp; Spring Cloud 系列'
+    weight = 10
+    identifier = "SpringCloud"
+    url = "category/SpringCloud"
+
+  [[languages.zh-cn.menu.main]]
+    parent = "技术文章"
+    name = '<img width="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADWElEQVR4nO2X30tTYRjH9xd4X2Dsol1EEtJdEFiSF10pldlVaVHEjiFFkKQVQeV0kfSTHdfW1pzKlpZtzXJuzp2pmzPFTdmUTdLJlEAvNKyB8MYzPG/visHZ2jxrnQc+8PCc85zz/e592XkfkUgIIYT4v2OoTVrtVFDTjILaYmgK8YqC2oproalzKZlwKqga3sXTSeFuZts9ykWcNOXnbITcTj67IRQcG1rlE5/dECK3GXcjxC8ADwqMuxGfBMeGVklNaRmZ83z0L3+ZR3ywMBfInJHQqGl07esKAmYjK6hnJoph64Ar/KsOOXmNK6HOTszKtD9uJitGQGSRcQFDiqh1RHAd8nSMWMQSDJgRjLAhrIgxta3lDvaiRlMpxvKvbi3BCNfI+xVRehdRIT2DIUWdejeH65BzMWKd1KO6jqOYLrEE46fp7Bm5bgki0Q0bhhS1t3UM1yHnYuS1XY5Oy0swD8USjPNmQ2aNfO6WO0KjphHgbrc9XNjsirGwdeAY7Vpl65CT15LRYb4VltLHYyzKAwcxgw3Xwr5BQ9D9ll53dz9d+msjfNLfWoO6GstR7/0zCXXBCJMPKxLMl3kkmC9GQsTf706znK3vyKLdhtznL2ISPm5TaqQdro8DeTJxm4EHKDZRGQfy308HtdvAcJY1I3BsII8RpAgwwB41IE9mBAwgR0EcyMlrRcTxB45DgpFUV+RbSIMxuq4kXRFyFl+3VuTeiqBtQYCDqUxqhOyJPCsTjDDCitB5urW8zS2oTSzBxNS7MB3tpeiC4kicO8azCQLJnkB9Me750Xs44b4CmQcjc4SzZwSGHXL42Xy0B6NTHMIDUp36RIJAsmeS2od7vuuKE+4TEUMbDHGZMLLBNrlUV/3u9sYRwH7vkq/nZFmUJaotwfRoK5bk6qoooNRUh9kegOyZkpUtsT3zuvKE+6qev4myKF899nkNTeMTJuWsu6spTBjZ4GzESUv7+R6qmCQ4aeoTZyPDLy4XMTS1xrdo5k/WmDbpflEq4XpJ7XbS1O0+bYvnve7JLNCnkXkZWmrYCfo0Mi9+r7bFA1pAkyjd0Ov1EZVKhQDI034Q3++1mM39H8xmBECeEZV8vNdmtRptAwMojtVqzIjKHH6vEEIIIcrt+AnU4LBcH67z1wAAAABJRU5ErkJggg=="> &nbsp; 杂七杂八'
+    weight = 20
+    identifier = "other"
+    url = "category/other"
+
+  # [[languages.zh-cn.menu.main]]
+  #   name = '<i class="fas fa-network-wired"></i>轻解计算机网络'
+  #   weight = 25
+  #   identifier = "network"
+  #   url = "category/network"     
+
+  [[languages.zh-cn.menu.main]]
+    name = "<i class='fas fa-yin-yang'></i>生活随笔"
+    weight = 10
+    identifier = "notes"
+    url = "category/notes"
+
+  [[languages.zh-cn.menu.main]]
+    name = '<i class="fas fab fa-medapps"></i>我的产品'
+    weight = 30
+    identifier = "product"
+    url = "category/product"
+
+  [[languages.zh-cn.menu.social]]
+    name = "GitHub"
+    weight = 10
+    identifier = "github"
+    url = "https://github.com/huzhicheng"
+
+  [[languages.zh-cn.menu.links]]
+    name = "关于我"
+    weight = 10
+    identifier = "about-me"
+    url = "https://github.com/huzhicheng"
+
+
+# [languages.en]
+#   languageCode = "en"
+#   languageName = "English"
+#   contentDir = "content/en"
+#   weight = 2
+
+#   [languages.en.params]
+#     description = "Write something here."
+
+#   [[languages.en.menu.main]]
+#     name = "Home"
+#     weight = 10
+#     identifier = "home"
+#     url = "/"
+
+#   [[languages.en.menu.main]]
+#     name = "Java"
+#     weight = 20
+#     identifier = "java"
+#     url = "category/java/"
+
+#   [[languages.en.menu.main]]
+#     name = "Life Notes"
+#     weight = 10
+#     identifier = "notes"
+#     url = "category/notes/"
+  
+#   [[languages.en.menu.main]]
+#     name = "Demo Showcase"
+#     weight = 20
+#     identifier = "demos"
+#     url = "category/demos/"
+
+#   [[languages.en.menu.social]]
+#     name = "GitHub"
+#     weight = 10
+#     identifier = "github"
+#     url = "https://github.com/huzhicheng"
+
+#   [[languages.en.menu.links]]
+#     name = "About Me"
+#     weight = 10
+#     identifier = "about-me"
+#     url = "https://github.com/huzhicheng"

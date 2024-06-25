@@ -1,0 +1,85 @@
+{{ define "header" }}
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">{{ .Title }}</h1>
+        <p class="header-date">
+        {{- if .Params.authors }}
+          {{- $last := (sub (len .Params.authors) 1) -}}
+          {{- i18n "author_by" }}
+          {{ range $index, $value := .Params.authors -}}
+            {{- $author := index ($.Site.Data.authors | default dict) $value -}}
+            {{- $author_lang := index ($author | default dict) $.Site.Language.Lang | default $author -}}
+            {{ $author_lang.name.display | default $author.name.display | default $value }}{{ if ne $index $last }}, {{ end -}}
+          {{ end }} /
+        {{ end }}
+        {{ .Date.Format (.Site.Params.dateFormatToUse | default "Mon 02 January 2006") -}}
+          {{ with .Params.categories -}}
+          {{ $.Scratch.Set "firstcategory" true }}
+          / {{ i18n "in_category" }}
+          {{ range . -}}
+          {{- $name := . -}}
+          {{- with $.Site.GetPage "taxonomy" (printf "/categories/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "/categories/%s" ($name | urlize))) -}}
+            {{- if not ($.Scratch.Get "firstcategory") -}}
+            , 
+            {{ else -}}
+            {{- $.Scratch.Set "firstcategory" false -}}
+            {{- end -}}
+            <a href="{{ .Permalink }}">{{ $name }}</a>
+          {{- end -}}
+          {{ end }}
+        </p>
+        {{ end }}
+        <div class="header-underline"></div>
+        {{ with .Params.tags -}}
+          {{ $.Scratch.Set "firsttag" true }}
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              {{ range (. | sort) -}}
+              {{- $name := . -}}
+              {{- with $.Site.GetPage "taxonomy" (printf "/tags/%s" $name) | default ($.Site.GetPage "taxonomy" (printf "/tags/%s" ($name | urlize))) -}}
+                {{- if not ($.Scratch.Get "firsttag") -}}
+                , 
+                {{ else -}}
+                {{- $.Scratch.Set "firsttag" false -}}
+                {{- end -}}
+                <a href="{{ .Permalink }}">{{ $name }}</a>
+              {{- end -}}
+              {{ end }}
+          </p>
+        {{ end }}
+        {{ partial "i18nlist.html" . }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ define "main" }}
+<div class="container content">
+  <article>
+  {{ .Content }}
+  </article>
+
+  {{ if .Site.Params.enableRelated -}}
+  {{- $related := .Site.RegularPages.Related . | first 5 -}}
+  {{- with $related }}
+      <h4>{{ i18n "related" }}</h4>
+      <dl class="row">
+      {{ range . }}
+          <dt class="col-md-3">{{ .Date.Format (.Site.Params.dateFormatToUse | default "Mon 02 January 2006") }}</dt>
+          <dd class="col-md-9"><a href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
+      {{ end }}
+      </dl>
+  {{ end }}
+  {{ end }}
+  {{ if (.Params.showAuthorCard | default .Site.Params.showAuthorCard) }}
+    {{ range .Params.authors }}
+    {{ partial "author_card.html" (dict "author" . "context" $) }}
+    {{ end }}
+  {{ end }}
+  {{ partial "comments.html" . }}
+</div>
+{{ end }}

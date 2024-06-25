@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo {{ hugo.Version }}" />
+  <meta charset="utf-8">
+  <title>
+    {{- block "title" . -}}
+      {{ if .IsPage }}{{ .Title }} · {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+    {{- end -}}
+  </title>
+  {{- partial "head.html" . -}}
+</head>
+<body>
+  {{ if .Resources.GetMatch "header" }}
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{{ (.Resources.GetMatch "header").Permalink }}'); background-position: center; background-size: cover; ">
+  {{ else if .Site.Params.headerImage }}
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{{ .Site.Params.headerImage | absURL }}'); background-position: top; background-size: cover;">
+  {{ else }}
+  <div class="header-container gradient">
+  {{ end }}
+  {{- partial "header.html" . -}}
+  {{ block "header" . }}{{- end }}
+  </div>
+  <main>
+  {{- block "main" . }}{{- end }}
+  </main>
+  {{- partial "footer.html" . -}}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

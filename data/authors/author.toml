@@ -1,0 +1,10 @@
+url = "https://www.showcodeba.com"
+
+[name]
+display = "作者显示名称"
+
+[image]
+url = "images/person.jpg"
+
+[zh-cn]
+description = "改成作者的个人描述"

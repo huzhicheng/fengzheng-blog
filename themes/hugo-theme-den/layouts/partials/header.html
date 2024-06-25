@@ -1,0 +1,64 @@
+<div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      {{ with .Site.GetPage "home" }}
+        <a class="float-left" href="{{ .Permalink }}">
+      {{ end }}
+        {{ with .Site.Params.siteLogoImage }}
+        <img class="mr20 header-logo-image" src="{{ . | absURL }}" alt="logo">
+        {{ end }}
+        {{ if .Site.Params.logoTitle }}
+          {{ .Site.Params.logoTitle | safeHTML }}
+        {{ else }}
+          {{ .Site.Title }}
+        {{ end }} 
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {{- $currentPage := . -}}
+        {{- $section := $currentPage.Section -}}
+        {{- range .Site.Menus.main -}}
+          {{- if .HasChildren -}}
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link {{ if $currentPage.IsMenuCurrent `main` . }}current_page_link{{end}}">
+                {{ .Name | safeHTML }}
+              </a>
+              <div class="sub-dropdown-menu">
+                {{ range $index, $child := .Children }}
+           
+                <a class="sub-nav-link" href="{{ .URL | absLangURL | safeURL }}">{{ $child.Name | safeHTML }}</a>
+           
+                {{ end }}
+                
+              </div>
+            </li>
+          {{ else }}
+            <li class="nav-item">
+              <a href="{{ .URL | absLangURL | safeURL  }}" class="nav-link {{ if $currentPage.IsMenuCurrent `main` . }}current_page_link{{end}}">
+                {{ .Name | safeHTML}}              
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      
+        
+      </ul>
+
+      {{ if and (gt (len .Site.Home.AllTranslations) 1) (.Site.Params.showMenuLanguages | default false ) }}
+          {{- $.Scratch.Set "language" .Language -}}
+          {{ range .Site.Home.AllTranslations }}
+          {{ if ne ($.Scratch.Get "language") .Language }}
+                <!-- Decorative Icon with Accessible Markup -->
+
+              <a class="nav-link" href="{{ .Permalink }}"><i class="fas fa-globe"></i> {{ .Language.LanguageName }}</a>
+            
+          {{ end }}
+          {{ end }}
+        {{ end }}
+    </div>
+  </nav>
+</div>
