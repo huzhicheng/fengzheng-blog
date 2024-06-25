@@ -9,14 +9,16 @@
 
 本博客主题修改自[hugo-theme-den](https://github.com/shaform/hugo-theme-den)
 
+[**在线预览**](https://showcodeba.com) • [**部署配置教程**](#部署配置教程) • [**定制化**](#定制化) • [**Twitter关注我**](https://x.com/moon_kites)  • [**微信联系我**](https://www.moonkite.cn/wechat)
+</div>
+
+### 功能特性
+
 - 主页简洁，可方便修改banner，页面描述等；
 - 顶部导航可配置，支持二级子菜单；
 - 全站使用「霞鹜文楷」字体，阅读体验良好；
 - 文章列表页清晰，文章页加入了左侧目录导航；
 - 使用 Github Pages，包含自动部署功能，编辑内容提交 GitHub 自动部署；
-
-[**在线预览**](https://showcodeba.com) • [**部署配置教程**](#部署配置教程) • [**定制化**](#定制化) • [**Twitter关注我**](https://x.com/moon_kites)  • [**微信联系我**](https://www.moonkite.cn/wechat)
-</div>
 
 ## 目录
 
