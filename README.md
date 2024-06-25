@@ -9,7 +9,7 @@
 
 本博客主题修改自[hugo-theme-den](https://github.com/shaform/hugo-theme-den)
 
-[**在线预览**](https://showcodeba.com) • [**部署配置教程**](#部署配置教程) • [**定制化**](#定制化) • [**Twitter关注我**](https://x.com/moon_kites)  • [**微信联系我**](https://www.moonkite.cn/wechat)
+[**在线预览（忽略站内广告）**](https://showcodeba.com) • [**部署配置教程**](#部署配置教程) • [**Twitter关注我**](https://x.com/moon_kites)  • [**微信联系我**](https://www.moonkite.cn/wechat)
 </div>
 
 ### 功能特性
